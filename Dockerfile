@@ -4,8 +4,8 @@ FROM python:2.7
 # RUN apk add --update \
 #     git \
 #     && rm -rf /var/cache/apk/*
-RUN apt-get update && apt-get install --yes \
-    git
+ RUN apt-get update && apt-get install --yes \
+     git
 
 RUN easy_install pip
 
@@ -15,7 +15,7 @@ RUN git checkout v0.9.5
 
 RUN pip install -r requirements.txt
 
-ADD setup.sh /coldsweat
+ADD start.sh /coldsweat
 
 ENV EMAIL test@example.com
 ENV PASSWORD password
@@ -24,4 +24,5 @@ ENV USERNAME coldsweat
 RUN mkdir /data
 VOLUME /data
 EXPOSE 8080
-CMD ["python", "sweat.py", "serve", "-r"]
+# CMD ["python", "sweat.py", "serve", "-r"]
+CMD ["./start.sh"]
